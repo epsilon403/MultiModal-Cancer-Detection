@@ -1,0 +1,23 @@
+
+train: 
+  - data/Data_Brain/Train/Glioma/images/train
+  - data/Data_Brain/Train/Meningioma/images/train
+  - data/Data_Brain/Train/No Tumor/images/train
+  - data/Data_Brain/Train/Pituitary/images/train
+
+val: 
+  - data/Data_Brain/Train/Glioma/images/valid
+  - data/Data_Brain/Train/Meningioma/images/valid
+  - data/Data_Brain/Train/No Tumor/images/valid
+  - data/Data_Brain/Train/Pituitary/images/valid
+
+
+nombre_class: 4 
+
+names:
+  0: Glioma
+  1: Meningioma
+  2: No Tumor
+  3: Pituitary
+
+augmentation: false
