@@ -10,20 +10,27 @@ st.title("🧠 Détection de tumeurs cérébrales avec YOLOv8")
 st.markdown("Téléversez une image IRM pour détecter le type de tumeur.")
 
 
-st.sidebar.header("⚙️ Paramètres du modèle")
-model_path = st.sidebar.text_input("Chemin du modèle YOLO :", "runs/detect/train/weights/best.pt")
+st.sidebar.header("⚙️ Choix du modèle")
 
+model_type = st.sidebar.radio(
+    "Sélectionnez le modèle à utiliser :",
+    ("Modèle sans augmentation", "Modèle avec augmentation")
+)
 
-if model_path and model_path.endswith(".pt"):
-    try:
-        model = YOLO(model_path)
-        st.sidebar.success(f"✅ Modèle chargé : {model_path}")
-    except Exception as e:
-        st.sidebar.error(f"Erreur lors du chargement du modèle : {e}")
-        model = None
+if model_type == "Modèle sans augmentation":
+    default_model_path = "runs/detect/train/weights/best.pt"  
 else:
-    st.sidebar.warning("Veuillez saisir un chemin vers un modèle YOLO (.pt).")
+    default_model_path = "runs/detect/train2/weights/best.pt"  
+
+model_path = st.sidebar.text_input("Chemin du modèle YOLO :", default_model_path)
+
+try:
+    model = YOLO(model_path)
+    st.sidebar.success(f"✅ Modèle chargé : {model_path}")
+except Exception as e:
+    st.sidebar.error(f"Erreur lors du chargement du modèle : {e}")
     model = None
+
 
 uploaded_file = st.file_uploader("📤 Téléversez une image (IRM)", type=["jpg", "jpeg", "png"])
 
